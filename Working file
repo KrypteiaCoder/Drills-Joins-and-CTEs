@@ -1,0 +1,58 @@
+SELECT
+  weather.Date, 
+  weather.Events,
+  weather.ZIP,
+	trips.trip_id,
+	trips.duration,
+	trips.zip_code
+FROM
+    weather 
+JOIN
+    trips 
+ON
+    weather.ZIP = trips.zip_code
+	
+WHERE 
+    weather.Events like 'Rain' 
+ORDER BY trips.Duration desc
+LIMIT 3 
+
+
+####################################
+
+
+SELECT
+    *
+FROM
+    status 
+
+WHERE 
+    status.bikes_available>status.docks_available 
+
+GROUP BY 1
+
+LIMIT 1
+
+
+######################################
+
+
+SELECT   
+    stations.name,
+	stations.dockcount,
+	trips.start_station,
+	trips.start_date,
+	COUNT(*) 
+FROM 
+    stations
+JOIN 
+    trips 
+ON 
+    stations.name = trips.start_station 
+GROUP BY stations.name
+ORDER BY stations.dockcount  DESC 
+
+
+#######################################
+
+
