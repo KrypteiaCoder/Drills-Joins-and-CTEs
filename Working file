@@ -56,3 +56,33 @@ ORDER BY stations.dockcount  DESC
 #######################################
 
 
+SELECT 
+    weather.Events,
+	weather.ZIP,
+	weather.Date,
+	trips.start_date,
+	trips.start_station,
+	trips.duration,
+	trips.zip_code,
+	MAX (trips.duration) duration,
+    (CASE WHEN weather.Events like 'Rain' THEN 'Rain_Day' ELSE 'Non_Rain_Day' END) Rain_Days_Or_Not
+	
+FROM 
+    weather
+	
+
+JOIN 
+    trips 
+ON
+    weather.zip = trips.zip_code
+	
+WHERE 
+    weather.Events like  'Rain'
+	
+GROUP BY trips.start_station
+
+ORDER BY trips.duration DESC 
+
+LIMIT 3
+
+	
